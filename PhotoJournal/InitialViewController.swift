@@ -35,7 +35,6 @@ class InitialViewController: UIViewController {
 
 private func appendNewPhotoToCollection(){
        guard let image = selectedImage,
-           // image.jpegData(compressionQuality: 1.0) converts UIImage to Data
            let imageData = image.jpegData(compressionQuality: 1.0) else{
                print("image is nil")
                return
