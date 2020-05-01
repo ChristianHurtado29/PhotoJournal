@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Images: Codable & Equatable {
+struct Image: Codable & Equatable {
   let imageData: Data
   let date: Date
   let identifier = UUID().uuidString

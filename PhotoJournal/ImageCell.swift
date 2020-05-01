@@ -46,7 +46,7 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    public func configureCell(imageObject: Images) {
+    public func configureCell(imageObject: Image) {
         guard let image = UIImage(data: imageObject.imageData) else{
             return
         }

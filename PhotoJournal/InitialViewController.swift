@@ -16,7 +16,7 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
     
-    private var images = [Images]()
+    private var images = [Image]()
     
     private let imagePickerController = UIImagePickerController()
     
@@ -41,6 +41,37 @@ class InitialViewController: UIViewController {
             images = try dataPersistence.loadEvents()
         } catch {
             print("loading events error: \(error)")
+        }
+    }
+    
+    private func appendNewPicToCollection(){
+        guard let image = selectedImage,
+            let imageData = image.jpegData(compressionQuality: 1.0) else {
+                print("image is nil")
+                return
+        }
+        print("Image size is \(image.size)")
+        let size = UIScreen.main.bounds.size
+        
+        let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
+        let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
+        print("resized image is now \(resizedImage.size)")
+        
+        guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
+            return
+        }
+        let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
+        
+        images.insert(imageObject, at: 0)
+        
+        let indexPath = IndexPath(row:0, section: 0)
+        
+        collectionView.insertItems(at: [indexPath])
+        
+        do{
+            try? dataPersistence.create(item: imageObject)
+        } catch {
+            print("saving error \(error)")
         }
     }
     
@@ -114,4 +145,15 @@ extension InitialViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true)
     }
     
+}
+
+
+extension UIImage {
+    func resizeImage(to width: CGFloat, height: CGFloat) -> UIImage {
+        let size = CGSize(width: width, height: height)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { (context) in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }

@@ -17,7 +17,7 @@ enum DataPersistenceError: Error {
 }
 
 class PersistenceHelper {
-    private var events = [Images]()
+    private var events = [Image]()
     
     private var filename: String
     
@@ -47,7 +47,7 @@ class PersistenceHelper {
     }
     
     // for re-ordering
-    public func reorderEvents(events: [Images]) {
+    public func reorderEvents(events: [Image]) {
         self.events = events
         try? save()
     }
@@ -55,7 +55,7 @@ class PersistenceHelper {
     // DRY - don't repeat yourself
     
     // create - save item to documents directory
-    public func create(item: Images) throws {
+    public func create(item: Image) throws {
         // step 2.
         // append new event to the events array
         events.append(item)
@@ -68,7 +68,7 @@ class PersistenceHelper {
     }
     
     // read - load (retrieve) items from documents directory
-    public func loadEvents() throws -> [Images] {
+    public func loadEvents() throws -> [Image] {
         // we need access to the filename URL that we are reading from
         let url = FileManager.pathToDocumentsDirectory(with: filename)
         
@@ -77,7 +77,7 @@ class PersistenceHelper {
         if FileManager.default.fileExists(atPath: url.path) {
             if let data = FileManager.default.contents(atPath: url.path) {
                 do {
-                    events = try PropertyListDecoder().decode([Images].self, from: data)
+                    events = try PropertyListDecoder().decode([Image].self, from: data)
                 } catch {
                     throw DataPersistenceError.decodingError(error)
                 }
