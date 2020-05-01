@@ -11,14 +11,15 @@ import AVFoundation
 
 class AddingPhotoViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImage!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
     private let dataPersistence = PersistenceHelper(filename: "images.plist")
     
     private var selectedImage: UIImage?{
         didSet{
-            appendNewPicToCollection()
+            imageView.image = selectedImage
+            //appendNewPicToCollection()
         }
     }
     
