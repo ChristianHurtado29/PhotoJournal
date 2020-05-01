@@ -126,8 +126,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Cancel" id="dY1-s7-Qoe"/>
-                                    <barButtonItem width="272" style="plain" systemItem="fixedSpace" id="j5A-Rs-2hZ"/>
-                                    <barButtonItem title="Save" id="uNU-5r-DX3"/>
+                                    <barButtonItem width="273" style="plain" systemItem="fixedSpace" id="j5A-Rs-2hZ"/>
+                                    <barButtonItem title="Save" id="uNU-5r-DX3">
+                                        <connections>
+                                            <action selector="saveButton:" destination="kbm-Ae-610" id="GmA-Ta-IN9"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wgd-0D-mmX">
@@ -178,6 +182,7 @@
                         <viewLayoutGuide key="safeArea" id="oqk-gE-ImL"/>
                     </view>
                     <connections>
+                        <outlet property="camButtonOutlet" destination="DLy-fw-CUL" id="ECH-rH-wdI"/>
                         <outlet property="imageView" destination="wgd-0D-mmX" id="3HG-MM-bmK"/>
                         <outlet property="textView" destination="aRs-ga-Xvf" id="09x-AD-wRG"/>
                     </connections>
