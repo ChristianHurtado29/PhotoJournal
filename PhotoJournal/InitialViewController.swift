@@ -24,7 +24,7 @@ class InitialViewController: UIViewController {
     
     private var selectedImage: UIImage?{
         didSet{
-            appendNewPhotoToCollection()
+           appendNewPicToCollection()
         }
     }
     
@@ -33,7 +33,7 @@ class InitialViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         imagePickerController.delegate = self
-        loadImages()
+//        loadImages()
     }
     
     private func loadImages() {
@@ -93,14 +93,7 @@ class InitialViewController: UIViewController {
     }
     
     
-    
-    private func appendNewPhotoToCollection(){
-        guard let image = selectedImage,
-            let imageData = image.jpegData(compressionQuality: 1.0) else{
-                print("image is nil")
-                return
-        }
-    }
+
 }
 
 extension InitialViewController: UICollectionViewDataSource {
