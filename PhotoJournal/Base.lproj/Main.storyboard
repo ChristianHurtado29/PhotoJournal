@@ -114,10 +114,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
         </scene>
-        <!--View Controller-->
+        <!--Adding Photo View Controller-->
         <scene sceneID="asl-SA-fnc">
             <objects>
-                <viewController id="kbm-Ae-610" sceneMemberID="viewController">
+                <viewController id="kbm-Ae-610" customClass="AddingPhotoViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Xo-9y-qDJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,22 +130,57 @@
                                     <barButtonItem title="Save" id="uNU-5r-DX3"/>
                                 </items>
                             </toolbar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wgd-0D-mmX">
-                                <rect key="frame" x="0.0" y="44" width="414" height="364"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wgd-0D-mmX">
+                                <rect key="frame" x="0.0" y="45" width="414" height="361.5"/>
+                                <color key="tintColor" red="0.54355831440000002" green="0.40386656729999998" blue="0.63455742390000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add descriptive text here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aRs-ga-Xvf">
+                                <rect key="frame" x="20" y="416" width="374" height="229"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPY-5c-MsI">
+                                <rect key="frame" x="0.0" y="759" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem image="photo.fill" catalog="system" id="wd4-vI-Fnh">
+                                        <connections>
+                                            <action selector="photoLibraryButton:" destination="kbm-Ae-610" id="aPq-lb-Xbg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="312" style="plain" systemItem="fixedSpace" id="CzQ-BR-oDe"/>
+                                    <barButtonItem image="camera.fill" catalog="system" id="DLy-fw-CUL">
+                                        <connections>
+                                            <action selector="cameraButton:" destination="kbm-Ae-610" id="CnC-fg-tse"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wgd-0D-mmX" firstAttribute="top" secondItem="CH1-qp-Xfw" secondAttribute="bottom" id="084-HI-hWR"/>
+                            <constraint firstItem="aRs-ga-Xvf" firstAttribute="height" secondItem="3Xo-9y-qDJ" secondAttribute="height" multiplier="0.271971" id="5jp-4b-gyL"/>
                             <constraint firstItem="CH1-qp-Xfw" firstAttribute="top" secondItem="oqk-gE-ImL" secondAttribute="top" id="OM8-UR-ZfY"/>
                             <constraint firstItem="wgd-0D-mmX" firstAttribute="trailing" secondItem="oqk-gE-ImL" secondAttribute="trailing" id="TGq-xH-6Uz"/>
                             <constraint firstItem="CH1-qp-Xfw" firstAttribute="trailing" secondItem="oqk-gE-ImL" secondAttribute="trailing" id="VbD-4b-G47"/>
                             <constraint firstItem="wgd-0D-mmX" firstAttribute="height" secondItem="3Xo-9y-qDJ" secondAttribute="height" multiplier="0.432304" id="Y4l-Aa-DJc"/>
+                            <constraint firstItem="oqk-gE-ImL" firstAttribute="trailing" secondItem="aRs-ga-Xvf" secondAttribute="trailing" constant="20" id="YoR-nT-bp5"/>
                             <constraint firstItem="CH1-qp-Xfw" firstAttribute="leading" secondItem="oqk-gE-ImL" secondAttribute="leading" id="ZAR-5C-BOF"/>
+                            <constraint firstItem="mPY-5c-MsI" firstAttribute="leading" secondItem="oqk-gE-ImL" secondAttribute="leading" id="ZZ5-2B-beq"/>
+                            <constraint firstItem="aRs-ga-Xvf" firstAttribute="leading" secondItem="oqk-gE-ImL" secondAttribute="leading" constant="20" id="bb8-FG-gH9"/>
+                            <constraint firstItem="mPY-5c-MsI" firstAttribute="trailing" secondItem="oqk-gE-ImL" secondAttribute="trailing" id="fFx-jA-UO0"/>
                             <constraint firstItem="wgd-0D-mmX" firstAttribute="leading" secondItem="oqk-gE-ImL" secondAttribute="leading" id="fRZ-30-T6V"/>
+                            <constraint firstItem="mPY-5c-MsI" firstAttribute="bottom" secondItem="oqk-gE-ImL" secondAttribute="bottom" id="jFh-pW-mMA"/>
+                            <constraint firstItem="aRs-ga-Xvf" firstAttribute="top" secondItem="wgd-0D-mmX" secondAttribute="bottom" constant="8" id="qfp-zh-6Pu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oqk-gE-ImL"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="wgd-0D-mmX" id="3HG-MM-bmK"/>
+                        <outlet property="textView" destination="aRs-ga-Xvf" id="09x-AD-wRG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WcA-KV-euT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -234,6 +269,8 @@
     </scenes>
     <resources>
         <image name="camera.fill" catalog="system" width="64" height="48"/>
+        <image name="photo" catalog="system" width="64" height="46"/>
+        <image name="photo.fill" catalog="system" width="64" height="46"/>
         <image name="photo.fill.on.rectangle.fill" catalog="system" width="64" height="48"/>
         <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
