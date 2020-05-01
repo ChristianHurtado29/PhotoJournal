@@ -58,8 +58,14 @@ class PersistenceHelper {
     public func create(item: Image) throws {
         // step 2.
         // append new event to the events array
+        do{
+            events = try loadEvents()
+        } catch{
+            print("error")
+        }
+        print(events.count)
         events.append(item)
-        
+        print(events.count)
         do {
             try save()
         } catch {

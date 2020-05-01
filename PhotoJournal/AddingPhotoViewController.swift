@@ -61,21 +61,20 @@ class AddingPhotoViewController: UIViewController {
         let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
         print("resized image is now \(resizedImage.size)")
-        
         guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
             return
         }
         let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
          delegate?.modelTake(image: imageObject)
-        
 //        images.insert(imageObject, at: 0)
         let indexPath = IndexPath(row:0, section: 0)
 //        collectionView.insertItems(at: [indexPath])
         do{
-            try? dataPersistence.create(item: imageObject)
+            try dataPersistence.create(item: imageObject)
         } catch {
             print("saving error \(error)")
         }
+        dismiss(animated: true)
     }
 
     

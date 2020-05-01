@@ -39,6 +39,7 @@ class InitialViewController: UIViewController {
     private func loadImages() {
         do{
             images = try dataPersistence.loadEvents()
+            print(images.count)
         } catch {
             print("loading events error: \(error)")
         }
@@ -72,20 +73,20 @@ class InitialViewController: UIViewController {
     
     
     
-    @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            
-            imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-            
-            imagePickerController.sourceType = .photoLibrary
-            
-            self.present(imagePickerController, animated: true)//, animated: true, completion: nil)
-        }
-    }
-    
-    
-    @IBAction func cameraButton(_ sender: UIBarButtonItem) {
-    }
+//    @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
+//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+//
+//            imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+//
+//            imagePickerController.sourceType = .photoLibrary
+//
+//            self.present(imagePickerController, animated: true)//, animated: true, completion: nil)
+//        }
+//    }
+//
+//
+//    @IBAction func cameraButton(_ sender: UIBarButtonItem) {
+//    }
     
     @IBAction func segueButton(_ sender: UIBarButtonItem){
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil),
@@ -95,8 +96,6 @@ class InitialViewController: UIViewController {
         addVC.delegate = self
         present(addVC, animated: true)
     }
-    
-
 }
 
 extension InitialViewController: UICollectionViewDataSource {
