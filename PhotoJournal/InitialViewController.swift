@@ -33,7 +33,7 @@ class InitialViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         imagePickerController.delegate = self
-//        loadImages()
+        loadImages()
     }
     
     private func loadImages() {
@@ -52,7 +52,6 @@ class InitialViewController: UIViewController {
         }
         print("Image size is \(image.size)")
         let size = UIScreen.main.bounds.size
-        
         let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
         print("resized image is now \(resizedImage.size)")
@@ -61,13 +60,9 @@ class InitialViewController: UIViewController {
             return
         }
         let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
-        
         images.insert(imageObject, at: 0)
-        
         let indexPath = IndexPath(row:0, section: 0)
-        
         collectionView.insertItems(at: [indexPath])
-        
         do{
             try? dataPersistence.create(item: imageObject)
         } catch {
@@ -92,6 +87,14 @@ class InitialViewController: UIViewController {
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
     }
     
+    @IBAction func segueButton(_ sender: UIBarButtonItem){
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil),
+        guard let addVC = storyboard?.instantiateViewController(identifier: "AddingPhotoViewController") as? AddingPhotoViewController else {
+            fatalError("could not downcast")
+        }
+        addVC.delegate = self
+        present(addVC, animated: true)
+    }
     
 
 }
@@ -149,4 +152,12 @@ extension UIImage {
             self.draw(in: CGRect(origin: .zero, size: size))
         }
     }
+}
+
+extension InitialViewController: PhotoDel{
+    func modelTake(image: Image) {
+        images.append(image)
+    }
+    
+    
 }

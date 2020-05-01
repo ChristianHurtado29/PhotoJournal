@@ -9,11 +9,20 @@
 import UIKit
 import AVFoundation
 
+// step 1 create protocol that takes in model
+
+protocol PhotoDel: AnyObject{
+    func modelTake(image: Image)
+
+}
+
 class AddingPhotoViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
+    // step 2 weak var delegate created here
+    weak var delegate: PhotoDel?
     private let dataPersistence = PersistenceHelper(filename: "images.plist")
     
     private var selectedImage: UIImage?{
@@ -49,7 +58,6 @@ class AddingPhotoViewController: UIViewController {
         }
         print("Image size is \(image.size)")
         let size = UIScreen.main.bounds.size
-        
         let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
         print("resized image is now \(resizedImage.size)")
@@ -58,13 +66,11 @@ class AddingPhotoViewController: UIViewController {
             return
         }
         let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
+         delegate?.modelTake(image: imageObject)
         
 //        images.insert(imageObject, at: 0)
-        
         let indexPath = IndexPath(row:0, section: 0)
-        
 //        collectionView.insertItems(at: [indexPath])
-        
         do{
             try? dataPersistence.create(item: imageObject)
         } catch {

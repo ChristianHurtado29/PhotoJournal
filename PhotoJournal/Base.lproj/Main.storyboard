@@ -20,25 +20,25 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="695"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9hD-XG-2ak">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9hD-XG-2ak">
                                     <size key="itemSize" width="367" height="443"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qKV-rU-zlS" customClass="ImageCell" customModule="PhotoJournal" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="qKV-rU-zlS" customClass="ImageCell" customModule="PhotoJournal" customModuleProvider="target">
                                         <rect key="frame" x="23.5" y="0.0" width="367" height="443"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Urh-Bl-NTy">
                                             <rect key="frame" x="0.0" y="0.0" width="367" height="443"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fHt-k4-ami">
-                                                    <rect key="frame" x="0.0" y="0.0" width="367" height="243.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fHt-k4-ami">
+                                                    <rect key="frame" x="0.0" y="0.0" width="367" height="245"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqe-oy-DGS">
-                                                    <rect key="frame" x="315" y="243.5" width="44" height="44"/>
+                                                    <rect key="frame" x="323" y="245" width="36" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="QfW-5H-Jb7"/>
                                                     </constraints>
@@ -94,8 +94,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="zUQ-Xn-abz"/>
                                     <barButtonItem image="plus" catalog="system" id="neH-kn-oYf">
                                         <connections>
-                                            <action selector="photoLibraryButton:" destination="BYZ-38-t0r" id="B4a-uY-bcE"/>
-                                            <segue destination="kbm-Ae-610" kind="presentation" id="4QS-jt-8OS"/>
+                                            <action selector="segueButton:" destination="BYZ-38-t0r" id="8l0-eL-h18"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CFB-RH-TNu"/>
@@ -117,13 +116,13 @@
         <!--Adding Photo View Controller-->
         <scene sceneID="asl-SA-fnc">
             <objects>
-                <viewController id="kbm-Ae-610" customClass="AddingPhotoViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddingPhotoViewController" id="kbm-Ae-610" customClass="AddingPhotoViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Xo-9y-qDJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CH1-qp-Xfw">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Cancel" id="dY1-s7-Qoe"/>
                                     <barButtonItem width="273" style="plain" systemItem="fixedSpace" id="j5A-Rs-2hZ"/>
@@ -135,18 +134,18 @@
                                 </items>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wgd-0D-mmX">
-                                <rect key="frame" x="0.0" y="45" width="414" height="361.5"/>
+                                <rect key="frame" x="0.0" y="89" width="414" height="385"/>
                                 <color key="tintColor" red="0.54355831440000002" green="0.40386656729999998" blue="0.63455742390000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add descriptive text here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aRs-ga-Xvf">
-                                <rect key="frame" x="20" y="416" width="374" height="229"/>
+                                <rect key="frame" x="20" y="483.5" width="374" height="243.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPY-5c-MsI">
-                                <rect key="frame" x="0.0" y="759" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem image="photo.fill" catalog="system" id="wd4-vI-Fnh">
                                         <connections>
@@ -251,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6jA-JJ-WBL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="734"/>
+            <point key="canvasLocation" x="1958" y="544"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8qT-j2-6Uw">
