@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qKV-rU-zlS">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qKV-rU-zlS" customClass="ImageCell" customModule="PhotoJournal" customModuleProvider="target">
                                         <rect key="frame" x="23.5" y="0.0" width="367" height="443"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Urh-Bl-NTy">
@@ -81,6 +81,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="367" height="443"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="fHt-k4-ami" id="iaQ-xT-ljE"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -91,6 +94,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="zUQ-Xn-abz"/>
                                     <barButtonItem image="plus" catalog="system" id="neH-kn-oYf">
                                         <connections>
+                                            <action selector="photoLibraryButton:" destination="BYZ-38-t0r" id="B4a-uY-bcE"/>
                                             <segue destination="hYO-2e-mQ5" kind="show" id="e7F-O0-6AV"/>
                                         </connections>
                                     </barButtonItem>

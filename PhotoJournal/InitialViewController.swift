@@ -23,20 +23,29 @@ class InitialViewController: UIViewController {
     private let dataPersistence = PersistenceHelper(filename: "images.plist")
     
     private var selectedImage: UIImage?{
-    didSet{
-        appendNewPhotoToCollection()
-    }
-    
+        didSet{
+            appendNewPhotoToCollection()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        imagePickerController.delegate = self
+        loadImages()
     }
-
-
-
+    
+    private func loadImages() {
+        do{
+            images = try dataPersistence.loadEvents()
+        } catch {
+            print("loading events error: \(error)")
+        }
+    }
+    
+    
+    
     @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             
@@ -52,15 +61,15 @@ class InitialViewController: UIViewController {
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
     }
     
-
-
-private func appendNewPhotoToCollection(){
-       guard let image = selectedImage,
-           let imageData = image.jpegData(compressionQuality: 1.0) else{
-               print("image is nil")
-               return
-       }
-}
+    
+    
+    private func appendNewPhotoToCollection(){
+        guard let image = selectedImage,
+            let imageData = image.jpegData(compressionQuality: 1.0) else{
+                print("image is nil")
+                return
+        }
+    }
 }
 
 extension InitialViewController: UICollectionViewDataSource {
