@@ -121,7 +121,10 @@ extension InitialViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxWidth: CGFloat = UIScreen.main.bounds.size.width
         let itemWidth: CGFloat = maxWidth * 0.80
-        return CGSize(width: itemWidth, height: itemWidth)  }
+        return CGSize(width: itemWidth, height: itemWidth * 1.50)
+    }
+    
+    
 }
 
 extension InitialViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -139,6 +142,7 @@ extension InitialViewController: UIImagePickerControllerDelegate, UINavigationCo
         imageView.image = image
         dismiss(animated: true)
     }
+    
     
 }
 
