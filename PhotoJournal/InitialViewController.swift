@@ -96,6 +96,13 @@ class InitialViewController: UIViewController {
         addVC.delegate = self
         present(addVC, animated: true)
     }
+    
+    @IBAction func editButton(_ sender: UIButton){
+        guard let editElip = storyboard?.instantiateViewController(identifier: "EditingViewController") as? EditingViewController else {
+            fatalError("couldn't downcast to editvc")
+        }
+        present(editElip, animated: true)
+    }
 }
 
 extension InitialViewController: UICollectionViewDataSource {

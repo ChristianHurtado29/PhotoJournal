@@ -44,6 +44,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="39"/>
                                                     <state key="normal" title="..."/>
+                                                    <connections>
+                                                        <action selector="editButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4N4-ks-oqv"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHd-Kw-wUT">
                                                     <rect key="frame" x="8" y="309" width="351" height="27"/>
@@ -193,35 +196,36 @@
         <!--Editing View Controller-->
         <scene sceneID="kOC-Fb-fss">
             <objects>
-                <viewController id="hYO-2e-mQ5" customClass="EditingViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditingViewController" id="hYO-2e-mQ5" customClass="EditingViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wjn-Qv-DGb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hfU-wv-b7f">
-                                <rect key="frame" x="20" y="64" width="374" height="256"/>
+                                <rect key="frame" x="20" y="134" width="374" height="256"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FiN-Dh-BsJ">
-                                <rect key="frame" x="20" y="345" width="374" height="149"/>
+                                <rect key="frame" x="20" y="415" width="374" height="149"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ux7-qA-Qp5">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem image="photo.fill.on.rectangle.fill" catalog="system" id="55b-7a-ftv">
-                                        <connections>
-                                            <action selector="photoLibraryButton:" destination="hYO-2e-mQ5" id="Mn7-5E-cKj"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qcj-St-o9T"/>
-                                    <barButtonItem image="camera.fill" catalog="system" id="trr-7Q-gZC">
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-us-fVE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Save" id="vky-u9-3do">
                                         <connections>
-                                            <action selector="cameraButton:" destination="hYO-2e-mQ5" id="Vsd-9Q-9kt"/>
+                                            <action selector="saveButton:" destination="hYO-2e-mQ5" id="gRa-bj-AhM"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -229,7 +233,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="hfU-wv-b7f" firstAttribute="top" secondItem="AlJ-Yr-tSK" secondAttribute="top" constant="20" id="3Qg-qI-uTY"/>
+                            <constraint firstItem="hfU-wv-b7f" firstAttribute="top" secondItem="AlJ-Yr-tSK" secondAttribute="top" constant="90" id="3Qg-qI-uTY"/>
                             <constraint firstItem="hfU-wv-b7f" firstAttribute="height" secondItem="wjn-Qv-DGb" secondAttribute="height" multiplier="0.285714" id="60l-AV-6R0"/>
                             <constraint firstItem="AlJ-Yr-tSK" firstAttribute="trailing" secondItem="hfU-wv-b7f" secondAttribute="trailing" constant="20" id="DWd-VB-9xj"/>
                             <constraint firstItem="FiN-Dh-BsJ" firstAttribute="height" secondItem="wjn-Qv-DGb" secondAttribute="height" multiplier="0.166295" id="EsD-uw-df9"/>
@@ -275,7 +279,6 @@
         <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="photo" catalog="system" width="64" height="46"/>
         <image name="photo.fill" catalog="system" width="64" height="46"/>
-        <image name="photo.fill.on.rectangle.fill" catalog="system" width="64" height="48"/>
         <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
 </document>

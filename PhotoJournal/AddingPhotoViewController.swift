@@ -31,17 +31,17 @@ class AddingPhotoViewController: UIViewController {
             //appendNewPicToCollection()
         }
     }
-    
     var imagePickerController = UIImagePickerController()
     
-    @IBOutlet weak var camButtonOutlet: UIBarButtonItem!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         camCheck()
         imagePickerController.delegate = self
     }
     
+    
+    @IBOutlet weak var camButtonOutlet: UIBarButtonItem!
+
     
     func camCheck(){
         if !UIImagePickerController.isSourceTypeAvailable(.camera){
