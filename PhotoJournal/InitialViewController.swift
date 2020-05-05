@@ -60,7 +60,7 @@ class InitialViewController: UIViewController {
         guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
             return
         }
-        let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
+        let imageObject = Image(imageData: resizedImageData, date: Date(), descript: "")
         images.insert(imageObject, at: 0)
         let indexPath = IndexPath(row:0, section: 0)
         collectionView.insertItems(at: [indexPath])

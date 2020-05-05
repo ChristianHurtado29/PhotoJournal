@@ -57,15 +57,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7U9-ez-Arv">
-                                                    <rect key="frame" x="8" y="344" width="351" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="w0o-Lo-kGI"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="NHd-Kw-wUT" secondAttribute="trailing" constant="8" id="1vX-b6-Kwg"/>
@@ -75,9 +66,6 @@
                                                 <constraint firstItem="NHd-Kw-wUT" firstAttribute="centerX" secondItem="fHt-k4-ami" secondAttribute="centerX" id="NlJ-yq-xhj"/>
                                                 <constraint firstItem="Aqe-oy-DGS" firstAttribute="top" secondItem="fHt-k4-ami" secondAttribute="bottom" id="QJB-05-Qob"/>
                                                 <constraint firstItem="fHt-k4-ami" firstAttribute="leading" secondItem="Urh-Bl-NTy" secondAttribute="leading" id="TjH-ff-j88"/>
-                                                <constraint firstItem="7U9-ez-Arv" firstAttribute="top" secondItem="NHd-Kw-wUT" secondAttribute="bottom" constant="8" id="cKH-6W-61L"/>
-                                                <constraint firstItem="7U9-ez-Arv" firstAttribute="leading" secondItem="Urh-Bl-NTy" secondAttribute="leading" constant="8" id="hLp-PG-DGX"/>
-                                                <constraint firstAttribute="trailing" secondItem="7U9-ez-Arv" secondAttribute="trailing" constant="8" id="qgH-1l-tTv"/>
                                                 <constraint firstItem="NHd-Kw-wUT" firstAttribute="top" secondItem="Aqe-oy-DGS" secondAttribute="bottom" constant="20" id="rzd-Kv-6NY"/>
                                                 <constraint firstItem="fHt-k4-ami" firstAttribute="top" secondItem="Urh-Bl-NTy" secondAttribute="top" id="yC5-GU-a3a"/>
                                                 <constraint firstItem="NHd-Kw-wUT" firstAttribute="leading" secondItem="Urh-Bl-NTy" secondAttribute="leading" constant="8" id="zGq-6v-wyF"/>
@@ -86,6 +74,7 @@
                                         <size key="customSize" width="367" height="443"/>
                                         <connections>
                                             <outlet property="imageView" destination="fHt-k4-ami" id="iaQ-xT-ljE"/>
+                                            <outlet property="textLabel" destination="NHd-Kw-wUT" id="CXK-EP-GLy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -219,9 +208,8 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qcj-St-o9T"/>
                                 </items>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-us-fVE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-us-fVE">
+                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Save" id="vky-u9-3do">
                                         <connections>
@@ -237,10 +225,13 @@
                             <constraint firstItem="hfU-wv-b7f" firstAttribute="height" secondItem="wjn-Qv-DGb" secondAttribute="height" multiplier="0.285714" id="60l-AV-6R0"/>
                             <constraint firstItem="AlJ-Yr-tSK" firstAttribute="trailing" secondItem="hfU-wv-b7f" secondAttribute="trailing" constant="20" id="DWd-VB-9xj"/>
                             <constraint firstItem="FiN-Dh-BsJ" firstAttribute="height" secondItem="wjn-Qv-DGb" secondAttribute="height" multiplier="0.166295" id="EsD-uw-df9"/>
+                            <constraint firstItem="Mpe-us-fVE" firstAttribute="top" secondItem="AlJ-Yr-tSK" secondAttribute="top" constant="20" id="MvK-fS-RTG"/>
                             <constraint firstItem="FiN-Dh-BsJ" firstAttribute="top" secondItem="hfU-wv-b7f" secondAttribute="bottom" constant="25" id="SpT-tG-KEF"/>
                             <constraint firstItem="hfU-wv-b7f" firstAttribute="leading" secondItem="AlJ-Yr-tSK" secondAttribute="leading" constant="20" id="aSt-eY-t74"/>
                             <constraint firstItem="AlJ-Yr-tSK" firstAttribute="trailing" secondItem="FiN-Dh-BsJ" secondAttribute="trailing" constant="20" id="cQG-2S-Yr6"/>
                             <constraint firstItem="FiN-Dh-BsJ" firstAttribute="leading" secondItem="AlJ-Yr-tSK" secondAttribute="leading" constant="20" id="ekg-C3-MUw"/>
+                            <constraint firstItem="Mpe-us-fVE" firstAttribute="leading" secondItem="AlJ-Yr-tSK" secondAttribute="leading" id="tKG-Vl-Rve"/>
+                            <constraint firstItem="Mpe-us-fVE" firstAttribute="trailing" secondItem="AlJ-Yr-tSK" secondAttribute="trailing" id="z0l-oJ-vxN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AlJ-Yr-tSK"/>
                     </view>

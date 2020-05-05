@@ -17,6 +17,7 @@ class ImageCell: UICollectionViewCell {
     
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var textLabel: UILabel!
     
     weak var delegate: ImageCellDelegate?
     
@@ -42,7 +43,6 @@ class ImageCell: UICollectionViewCell {
 
             delegate?.didLongPress(self)
         }
-        
     }
     
     
@@ -51,6 +51,7 @@ class ImageCell: UICollectionViewCell {
             return
         }
         imageView.image = image
+        textLabel.text = imageObject.descript
     }
 }
 

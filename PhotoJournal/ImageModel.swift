@@ -12,5 +12,5 @@ struct Image: Codable & Equatable {
   let imageData: Data
   let date: Date
   let identifier = UUID().uuidString
-  let description: String
+  let descript: String
 }

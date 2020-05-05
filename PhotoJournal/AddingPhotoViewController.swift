@@ -31,12 +31,21 @@ class AddingPhotoViewController: UIViewController {
             //appendNewPicToCollection()
         }
     }
+    
+    private var selectText: String?{
+        didSet{
+            textView.text = selectText
+        }
+    }
+    
+    
     var imagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        camCheck()
+        textView.delegate = self
         imagePickerController.delegate = self
+        camCheck()
     }
     
     
@@ -64,7 +73,7 @@ class AddingPhotoViewController: UIViewController {
         guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
             return
         }
-        let imageObject = Image(imageData: resizedImageData, date: Date(), description: "")
+        let imageObject = Image(imageData: resizedImageData, date: Date(), descript: "\(selectText ?? "")")
          delegate?.modelTake(image: imageObject)
 //        images.insert(imageObject, at: 0)
         let indexPath = IndexPath(row:0, section: 0)
@@ -102,9 +111,6 @@ class AddingPhotoViewController: UIViewController {
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         appendNewPicToCollection()
     }
-    
-    
-    
 
 }
 
@@ -115,8 +121,19 @@ extension AddingPhotoViewController: UIImagePickerControllerDelegate, UINavigati
             return
         }
         selectedImage = image
-
-        
         dismiss(animated: true)
     }
+}
+
+extension AddingPhotoViewController: UITextViewDelegate{
+    func textViewDidEndEditing(_ textView: UITextView) {
+//        selectText = textView.text
+//        print(selectText!)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        selectText = textView.text
+        print(selectText!)
+    }
+    
 }
