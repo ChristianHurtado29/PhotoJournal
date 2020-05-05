@@ -91,15 +91,13 @@ class PersistenceHelper {
                 throw DataPersistenceError.noData
             }
         }
-        else {
-            throw DataPersistenceError.fileDoesNotExist(filename)
-        }
         return events
     }
     
     // delete - remove item from documents directory
     public func delete(event index: Int) throws {
         // remove the item from the events array
+        let _ = try? loadEvents()
         events.remove(at: index)
         
         // save our events array to the documents directory
