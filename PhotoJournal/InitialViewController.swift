@@ -28,7 +28,7 @@ class InitialViewController: UIViewController {
     
     private var selectedImage: UIImage?{
         didSet{
-           appendNewPicToCollection()
+            appendNewPicToCollection()
         }
     }
     
@@ -73,7 +73,7 @@ class InitialViewController: UIViewController {
         let indexPath = IndexPath(row:0, section: 0)
         collectionView.insertItems(at: [indexPath])
         do{
-//            try? dataPersistence.create(item: imageObject)
+            //            try? dataPersistence.create(item: imageObject)
         } catch {
             print("saving error \(error)")
         }
@@ -81,23 +81,23 @@ class InitialViewController: UIViewController {
     
     
     
-//    @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-//
-//            imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-//
-//            imagePickerController.sourceType = .photoLibrary
-//
-//            self.present(imagePickerController, animated: true)//, animated: true, completion: nil)
-//        }
-//    }
-//
-//
-//    @IBAction func cameraButton(_ sender: UIBarButtonItem) {
-//    }
+    //    @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
+    //        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+    //
+    //            imagePickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+    //
+    //            imagePickerController.sourceType = .photoLibrary
+    //
+    //            self.present(imagePickerController, animated: true)//, animated: true, completion: nil)
+    //        }
+    //    }
+    //
+    //
+    //    @IBAction func cameraButton(_ sender: UIBarButtonItem) {
+    //    }
     
     @IBAction func segueButton(_ sender: UIBarButtonItem){
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil),
+        //        let storyboard = UIStoryboard(name: "Main", bundle: nil),
         guard let addVC = storyboard?.instantiateViewController(identifier: "AddingPhotoViewController") as? AddingPhotoViewController else {
             fatalError("could not downcast")
         }
@@ -106,14 +106,14 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func editButton(_ sender: UIButton){
-
+        
     }
     
     func deletingPhoto(indexPath: IndexPath){
         do{
             try dataPersistence.delete(event: indexPath.row)
             images.remove(at: indexPath.row)
-//            collectionView.reloadData()
+            //            collectionView.reloadData()
         } catch {
             print("deleting error \(error)")
         }
@@ -183,34 +183,36 @@ extension InitialViewController: PhotoDel{
         images.append(image)
     }
     
-
+    
 }
 
 extension InitialViewController: ImageCellDelegate{
     
     func alertAction(_ imageCell: ImageCell) {
         guard let indexPath = collectionView.indexPath(for: imageCell) else {
-                    return
-                }
-                let showAlert = UIAlertController(title: "Do you want to...", message: "", preferredStyle: .actionSheet)
-                let editAction = UIAlertAction(title: "Edit", style: .default){
-                    [weak self] alertAction in
-                    guard let editorVC = self?.storyboard?.instantiateViewController(identifier: "AddingPhotoViewController") as? AddingPhotoViewController else {
-                        fatalError("couldn't get to adding view controller")
-                    }
-                    let selectedCell = self?.images[indexPath.row]
-                    editorVC.image = selectedCell
-                    editorVC.indexPath = indexPath.row
-                    editorVC.images = self!.images
-                    self?.present(editorVC, animated: true)
-                }
-                let deleteAction = UIAlertAction(title: "Delete", style: .destructive){
-                    [weak self] alertAction in
-                    self?.deletingPhoto(indexPath: indexPath)
-                }
-                showAlert.addAction(editAction)
-                showAlert.addAction(deleteAction)
-                present(showAlert, animated: true)
+            return
+        }
+        let showAlert = UIAlertController(title: "Do you want to...", message: "", preferredStyle: .actionSheet)
+        let editAction = UIAlertAction(title: "Edit", style: .default){
+            [weak self] alertAction in
+            guard let editorVC = self?.storyboard?.instantiateViewController(identifier: "AddingPhotoViewController") as? AddingPhotoViewController else {
+                fatalError("couldn't get to adding view controller")
+            }
+            let selectedCell = self?.images[indexPath.row]
+            editorVC.image = selectedCell
+            editorVC.indexPath = indexPath.row
+            editorVC.images = self!.images
+            self?.present(editorVC, animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style:.cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive){
+            [weak self] alertAction in
+            self?.deletingPhoto(indexPath: indexPath)
+        }
+        showAlert.addAction(cancelAction)
+        showAlert.addAction(editAction)
+        showAlert.addAction(deleteAction)
+        present(showAlert, animated: true)
     }
     
     
