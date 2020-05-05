@@ -9,8 +9,9 @@
 import UIKit
 
 protocol ImageCellDelegate: AnyObject {
+//    func didLongPress(_ imageCell: ImageCell)
     
-    func didLongPress(_ imageCell: ImageCell)
+    func alertAction(_ imageCell: ImageCell)
 }
 
 class ImageCell: UICollectionViewCell {
@@ -18,6 +19,7 @@ class ImageCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     weak var delegate: ImageCellDelegate?
     
@@ -41,8 +43,13 @@ class ImageCell: UICollectionViewCell {
             gesture.state = .cancelled
             print("long press activated")
 
-            delegate?.didLongPress(self)
+//            delegate?.didLongPress(self)
         }
+    }
+    
+    @IBAction func editButton(_ sender: UIButton) {
+        print("HeREEEE")
+        delegate?.alertAction(self)
     }
     
     
@@ -52,6 +59,7 @@ class ImageCell: UICollectionViewCell {
         }
         imageView.image = image
         textLabel.text = imageObject.descript
+        dateLabel.text = imageObject.date.description
     }
 }
 

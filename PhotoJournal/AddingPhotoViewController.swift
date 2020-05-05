@@ -21,14 +21,14 @@ class AddingPhotoViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     
-    // step 2 weak var delegate created here
+    public var image: Image?
+    
     weak var delegate: PhotoDel?
     private let dataPersistence = PersistenceHelper(filename: "images.plist")
     
     private var selectedImage: UIImage?{
         didSet{
             imageView.image = selectedImage
-            //appendNewPicToCollection()
         }
     }
     
@@ -73,7 +73,7 @@ class AddingPhotoViewController: UIViewController {
         guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
             return
         }
-        let imageObject = Image(imageData: resizedImageData, date: Date(), descript: "\(selectText ?? "")")
+        let imageObject = Image(imageData: resizedImageData, date: Date(), descript: selectText ?? "")
          delegate?.modelTake(image: imageObject)
 //        images.insert(imageObject, at: 0)
         let indexPath = IndexPath(row:0, section: 0)
@@ -126,10 +126,6 @@ extension AddingPhotoViewController: UIImagePickerControllerDelegate, UINavigati
 }
 
 extension AddingPhotoViewController: UITextViewDelegate{
-    func textViewDidEndEditing(_ textView: UITextView) {
-//        selectText = textView.text
-//        print(selectText!)
-    }
     
     func textViewDidChange(_ textView: UITextView) {
         selectText = textView.text
