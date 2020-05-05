@@ -40,6 +40,10 @@ class InitialViewController: UIViewController {
         loadImages()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
     private func loadImages() {
         do{
             images = try dataPersistence.loadEvents()
@@ -69,7 +73,7 @@ class InitialViewController: UIViewController {
         let indexPath = IndexPath(row:0, section: 0)
         collectionView.insertItems(at: [indexPath])
         do{
-            try? dataPersistence.create(item: imageObject)
+//            try? dataPersistence.create(item: imageObject)
         } catch {
             print("saving error \(error)")
         }
@@ -105,7 +109,7 @@ class InitialViewController: UIViewController {
 
     }
     
-    @objc func deletingPhoto(indexPath: IndexPath){
+    func deletingPhoto(indexPath: IndexPath){
         do{
             try dataPersistence.delete(event: indexPath.row)
             images.remove(at: indexPath.row)
@@ -179,34 +183,10 @@ extension InitialViewController: PhotoDel{
         images.append(image)
     }
     
-//    func alertAction(_ imageCell: ImageCell) {
-//        guard let indexPath = collectionView.indexPath(for: imageCell) else {
-//            return
-//        }
-//        let showAlert = UIAlertController(title: "Do you want to...", message: "", preferredStyle: .actionSheet)
-//        let editAction = UIAlertAction(title: "Edit", style: .default){
-//            [weak self] alertAction in
-//            guard let editorVC = self?.storyboard?.instantiateViewController(identifier: "AddingPhotoViewController") as? AddingPhotoViewController else {
-//                fatalError("couldn't get to adding view controller")
-//            }
-//            let selectedCell = self?.images[indexPath.row]
-//            editorVC.image = selectedCell
-//            self?.present(editorVC, animated: true)
-//        }
-//        let deleteAction = UIAlertAction(title: "Delete", style: .destructive){
-//            [weak self] alertAction in
-//            self?.deletingPhoto(indexPath: indexPath)
-//        }
-//        showAlert.addAction(editAction)
-//        showAlert.addAction(deleteAction)
-//        present(showAlert, animated: true)
-//    }
+
 }
 
 extension InitialViewController: ImageCellDelegate{
-//    func didLongPress(_ imageCell: ImageCell) {
-//        <#code#>
-//    }
     
     func alertAction(_ imageCell: ImageCell) {
         guard let indexPath = collectionView.indexPath(for: imageCell) else {
@@ -220,6 +200,8 @@ extension InitialViewController: ImageCellDelegate{
                     }
                     let selectedCell = self?.images[indexPath.row]
                     editorVC.image = selectedCell
+                    editorVC.indexPath = indexPath.row
+                    editorVC.images = self!.images
                     self?.present(editorVC, animated: true)
                 }
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive){

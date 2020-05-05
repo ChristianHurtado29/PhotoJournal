@@ -13,7 +13,7 @@ import AVFoundation
 
 protocol PhotoDel: AnyObject{
     func modelTake(image: Image)
-
+    
 }
 
 class AddingPhotoViewController: UIViewController {
@@ -22,6 +22,8 @@ class AddingPhotoViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     
     public var image: Image?
+    public var images = [Image?]()
+    public var indexPath: Int?
     
     weak var delegate: PhotoDel?
     private let dataPersistence = PersistenceHelper(filename: "images.plist")
@@ -43,6 +45,12 @@ class AddingPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let image = image {
+            
+            print("editing object")
+        } else {
+            print("new object")
+        }
         textView.delegate = self
         imagePickerController.delegate = self
         camCheck()
@@ -50,7 +58,7 @@ class AddingPhotoViewController: UIViewController {
     
     
     @IBOutlet weak var camButtonOutlet: UIBarButtonItem!
-
+    
     
     func camCheck(){
         if !UIImagePickerController.isSourceTypeAvailable(.camera){
@@ -59,38 +67,71 @@ class AddingPhotoViewController: UIViewController {
         }
     }
     
+    //    private func addImageIndexPath(indexPath: Int){
+    //        do{
+    //            try dataPersistence.create(item: <#T##Image#>)
+    //        }
+    //    }
+    
     private func appendNewPicToCollection(){
-        guard let image = selectedImage,
-            let imageData = image.jpegData(compressionQuality: 1.0) else {
-                print("image is nil")
+        if let image = image{
+            guard let image = selectedImage,
+                let imageData = image.jpegData(compressionQuality: 1.0) else {
+                    print("image is nil")
+                    return
+            }
+            print("Image size is \(image.size)")
+            let size = UIScreen.main.bounds.size
+            let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
+            let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
+            print("resized image is now \(resizedImage.size)")
+            guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
                 return
-        }
-        print("Image size is \(image.size)")
-        let size = UIScreen.main.bounds.size
-        let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
-        let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
-        print("resized image is now \(resizedImage.size)")
-        guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
-            return
-        }
-        let imageObject = Image(imageData: resizedImageData, date: Date(), descript: selectText ?? "")
-         delegate?.modelTake(image: imageObject)
-//        images.insert(imageObject, at: 0)
-        let indexPath = IndexPath(row:0, section: 0)
-//        collectionView.insertItems(at: [indexPath])
-        do{
-            try dataPersistence.create(item: imageObject)
-        } catch {
-            print("saving error \(error)")
+            }
+            let imageObject = Image(imageData: resizedImageData, date: Date(), descript: selectText ?? "")
+            delegate?.modelTake(image: imageObject)
+                    images.insert(imageObject, at: indexPath!)
+//            let indexPath = IndexPath(row:0, section: 0)
+            //        collectionView.insertItems(at: [indexPath])
+            do{
+                try dataPersistence.create(item: imageObject, indexPath: indexPath!)
+            } catch {
+                print("saving error \(error)")
+            }
+        } else {
+            
+            guard let image = selectedImage,
+                let imageData = image.jpegData(compressionQuality: 1.0) else {
+                    print("image is nil")
+                    return
+            }
+            print("Image size is \(image.size)")
+            let size = UIScreen.main.bounds.size
+            let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
+            let resizedImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
+            print("resized image is now \(resizedImage.size)")
+            guard let resizedImageData = resizedImage.jpegData(compressionQuality: 1.0) else {
+                return
+            }
+            let imageObject = Image(imageData: resizedImageData, date: Date(), descript: selectText ?? "")
+            delegate?.modelTake(image: imageObject)
+            //        images.insert(imageObject, at: 0)
+            let indexPath = IndexPath(row:0, section: 0)
+            //        collectionView.insertItems(at: [indexPath])
+            do{
+                try dataPersistence.create(item: imageObject, indexPath: indexPath.row)
+            } catch {
+                print("saving error \(error)")
+            }
         }
         dismiss(animated: true)
     }
-
+    
     
     @IBAction func photoLibraryButton(_ sender: UIBarButtonItem) {
         print("im hereeee")
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default){
+        _ = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        _ = UIAlertAction(title: "Photo Library", style: .default){
             [weak self]  alertAction in
             self?.imagePickerController.sourceType = .photoLibrary
         }
@@ -99,19 +140,27 @@ class AddingPhotoViewController: UIViewController {
     
     
     @IBAction func cameraButton(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default){
+        _ = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        _ = UIAlertAction(title: "Camera", style: .default){
             [weak self]  alertAction in
             self?.imagePickerController.sourceType = .camera
         }
-
         present(imagePickerController, animated: true)
     }
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
-        appendNewPicToCollection()
+        if let image = image{
+            do{
+                try dataPersistence.delete(event: indexPath!)
+            } catch {
+                print("deleting error \(error)")
+            }
+            appendNewPicToCollection()
+        } else {
+            appendNewPicToCollection()
+        }
+        dismiss(animated: true)
     }
-
 }
 
 extension AddingPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
